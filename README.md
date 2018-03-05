@@ -1,4 +1,6 @@
-# Starter: WebAssembly/WebGL and Native/OpenGL 3D project
+# WebAssembly/WebGL and Native/OpenGL 3D project StarterKit
+
+A starting point for a new web and native cross-platform 3D project.
 
 Builds with CMake. Supports [GLFW](http://www.glfw.org/).
 
@@ -33,10 +35,10 @@ Builds with CMake. Supports [GLFW](http://www.glfw.org/).
 
 Tested on Ubuntu 16.04.
 
-* Install development tools: `sudo apt install xorg-dev`
-* Install GLFW
-  * [Download the source, currently 3.2.1][glfw-dl]
-  * Uncompress the files
+* Install development tools X11 and OpenGL: `sudo apt install xorg-dev libgl1-mesa-dev`
+* Install GLFW: http://www.glfw.org/download.html
+  * `wget https://github.com/glfw/glfw/releases/download/3.2.1/glfw-3.2.1.zip`
+  * `unzip glfw-3.2.1.zip`
   * `cd glfw-3.2.1`
   * `cmake .`
   * `sudo make install`

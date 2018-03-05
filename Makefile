@@ -9,7 +9,7 @@ all: $(WASM) $(NATIVE)
 # Build WebAssembly and load in Python Webserver
 .PHONY: wasm
 wasm: $(WASM)
-	cd build && python -m SimpleHTTPServer 8080	
+	cd build && python -m SimpleHTTPServer 8080
 
 # Build Native and execute
 .PHONY: native
