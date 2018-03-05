@@ -16,5 +16,5 @@ endif()
 add_executable(wasm ${DEMO_SOURCE})
 set_target_properties(wasm 
     PROPERTIES SUFFIX ".html"
-    LINK_FLAGS "-O3  -s USE_WEBGL2=1 -s FULL_ES3=1 -s USE_GLFW=3 -s WASM=1")
+    LINK_FLAGS "-Os -s USE_WEBGL2=1 -s FULL_ES3=1 -s USE_GLFW=3 -s WASM=1")
 em_link_js_library(wasm ${libraryJsFiles})
