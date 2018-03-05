@@ -1,16 +1,20 @@
 cmake_minimum_required(VERSION 3.0)
-project(Demo)
+project(demo)
 
-set(CMAKE_CXX_STANDARD 11)
+add_definitions(-std=c++14)
+set(CMAKE_CXX_STANDARD 14)
+set(DEMO_SOURCE src/demo.cpp)
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_SOURCE_DIR}/build/debug")
+message(STATUS "WebAssembly build enabled")
+message(STATUS "CMAKE_TOOLCHAIN_FILE='${CMAKE_TOOLCHAIN_FILE}'")
+if(DEFINED ENV{EMSCRIPTEN})
+    message(STATUS "emscripten environment is loaded")
+else()
+    message(FATAL_ERROR "emscripten environment is NOT loaded")
+endif()
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
-
-find_package(OpenGL REQUIRED)
-find_package(glfw3 REQUIRED)
-
-include_directories(${OPENGL_INCLUDE_DIR})
-
-add_executable(Demo src/demo.cpp)
-target_link_libraries(Demo ${OPENGL_gl_LIBRARY} glfw)
+add_executable(wasm ${DEMO_SOURCE})
+set_target_properties(wasm 
+    PROPERTIES SUFFIX ".html"
+    LINK_FLAGS "-O3  -s USE_WEBGL2=1 -s FULL_ES3=1 -s USE_GLFW=3 -s WASM=1")
+em_link_js_library(wasm ${libraryJsFiles})
