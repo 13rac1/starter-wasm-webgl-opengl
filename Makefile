@@ -1,4 +1,5 @@
 # Make as a task manager to run cmake to run make.
+SRC=src/demo.cpp
 WASM=build/wasm.html
 NATIVE=build-native/native
 
@@ -15,12 +16,12 @@ wasm: $(WASM)
 native: $(NATIVE)
 	$(NATIVE)
 
-$(WASM):
+$(WASM): $(SRC)
 	mkdir -p build
 	cd build && cmake .. -DCMAKE_TOOLCHAIN_FILE=${EMSCRIPTEN}/cmake/Modules/Platform/Emscripten.cmake
 	cd build && make
 
-$(NATIVE):
+$(NATIVE): $(SRC)
 	mkdir -p build-native
 	cd build-native && cmake ../native
 	cd build-native && make
